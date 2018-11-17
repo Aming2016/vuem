@@ -8,6 +8,10 @@ import {axios} from './common/js/axios.js' //axios
 Vue.prototype.$http = axios;
 import URL from "./common/js/url.js" //全局url
 Vue.prototype.$url = URL;
+// 引入fastclick
+import fastclick from 'fastclick'
+// 官方推荐将fastclick绑定到body下，这样在body下的元素都不会有300ms的延迟
+fastclick.attach(document.body)
 
 //解决移动端点击事件延时300毫秒
 import FastClick from 'fastclick'
