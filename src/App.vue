@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <div class="div_1">
-        <span>fasdf</span>
-      小二</div>
     <router-view/>
   </div>
 </template>
@@ -16,11 +12,13 @@ export default {
     };
   },
   created(){
-    console.log(this.$http.get)
-    console.log(this.$url)
   }
 }
 </script>
 
 <style lang="less">
+#app{
+  width:100%;
+  height:100%;
+}
 </style>
