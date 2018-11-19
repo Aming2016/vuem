@@ -21,8 +21,6 @@ import vfilter from "./common/js/vfilter.js"
 for (let key in vfilter) {
   Vue.filter(key, vfilter[key])
 }
-
-
 //ios解决键盘挡住输入框指令
 Vue.directive('iosinput', {
   inserted: function (el) {
@@ -34,8 +32,20 @@ Vue.directive('iosinput', {
     }, false);
   }
 })
-
 Vue.config.productionTip = false
+
+//全局修改mint-UI样式
+import './assets/css/my-mint.less';
+//全局注册组件
+//header组件
+import zHerder  from "./components/module/captions/index.js";
+Vue.use(zHerder)
+//手机框
+import zUser  from "./components/module/user/index.js";
+Vue.use(zUser)
+//密码框
+import zPassword  from "./components/module/password/index.js";
+Vue.use(zPassword)
 
 /* eslint-disable no-new */
 new Vue({
