@@ -6,6 +6,30 @@ const vfilter = {
             return val;
         }
     },
+    //金额处理函数保留小数点后面两位小数    
+    disposenumber(val) {
+        if (val.indexOf(".") != -1) {
+          let listnumber = val.split(".");
+          if (listnumber[1][2]) {
+            if (listnumber[1][2] != 0) {
+              console.log("dddd")
+              let dianhounumber = listnumber[1].slice(0, 2);
+              if(parseInt(dianhounumber)+1>=10){
+                return listnumber[0]+"."+(parseInt(dianhounumber)+1)
+              }else{
+                console.log(parseInt(dianhounumber)+1)
+                return listnumber[0]+".0"+(parseInt(dianhounumber)+1)
+              }
+            }else{
+                return listnumber[0]+"."+listnumber[1].slice(0, 2);
+            }
+          }else{
+            return val;
+          }
+        }else{
+          return val+".00";
+        }
+    },
     timefilter(val) {//事件过滤器   
         var dateTime = new Date(val);
         var year = dateTime.getFullYear();

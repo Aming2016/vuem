@@ -28,5 +28,10 @@ export default {
 };
 </script>
 <style scoped lang="less">
-
+    #headers{
+        width:100%;
+        position: fixed;
+        top:0;
+        left:0;
+    }
 </style>
