@@ -34,8 +34,8 @@ Vue.config.productionTip = false
 import './assets/css/my-mint.less';
 //全局注册组件
 //header组件
-import zHerder  from "./components/module/captions/index.js";
-Vue.use(zHerder)
+import zHeader  from "./components/module/captions/index.js";
+Vue.use(zHeader)
 //手机框
 import zUser  from "./components/module/user/index.js";
 Vue.use(zUser)
@@ -73,6 +73,9 @@ Vue.use(zGroupnumber)
 //组合框
 import zExecute from "./components/module/execute/index.js";
 Vue.use(zExecute)
+//底部导航
+import zNavbtn from "./components/module/navbtn/index.js";
+Vue.use(zNavbtn)
 
 /* eslint-disable no-new */
 new Vue({

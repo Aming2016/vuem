@@ -1,6 +1,5 @@
 <template >
   <div class="hello">
-    <z-herder :header="header" :show="false"></z-herder>
     <div id="serchbox">
       <!-- 搜索框 -->
       <z-search @search="search"></z-search>
@@ -26,7 +25,6 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      header: "导航",
       twonavlist: "",
       search: "",
       commodityobjct: "",
@@ -65,12 +63,12 @@ export default {
   width: 100%;
   height: 0.5rem;
   background: #20c7c9;
-  padding-top: 0.6rem;
+  padding-top: 0.2rem;
 }
 #contentbox {
   width: 100%;
-  height: calc(100vh - 1.4rem);
+  height: calc(100vh - 1.52rem);
   position: fixed;
-  bottom: 0;
+  bottom: 0.5rem;
 }
 </style>

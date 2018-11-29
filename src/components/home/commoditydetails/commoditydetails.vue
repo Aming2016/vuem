@@ -1,6 +1,6 @@
 <template >
   <div class="commoditydetails">
-      <z-herder :header="header" :show="true"></z-herder>
+      <z-header :header="header" :show="true"></z-header>
       <ul>
         <router-link tag="li" :to="item.path" replace v-for="(item,index) in navlist" :key="index" :class="{activeclass:index==active}" @click.native="activebtn(index)">
           {{item.value}}
@@ -34,7 +34,7 @@ export default {
 .commoditydetails{
   border-top:0.005rem solid #ffffff;
   box-sizing: border-box;
-  height:100%;
+  height: 100%;
 
 }
 ul {

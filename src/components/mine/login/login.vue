@@ -69,9 +69,7 @@ export default {
     },
     //点击登录
     submbtn() {
-      alert("aaaaaaaaa")
       if (this.pasd) {
-        alert("bbbbbbbbbbbbbbbbb")
         if (this.user && this.password) {
           if (this.user.length == 11) {
             this._querys();
@@ -120,7 +118,6 @@ export default {
           user_password: this.password //密码
         })
         .then(res => {
-          alert("ccccccccccc")
           if (res.data.error_code == "0") {
             this.$store.dispatch("my_token", res.data.data.token);
              MessageBox.alert("登陆成功")
@@ -141,7 +138,6 @@ export default {
           code: this.code //密码
         })
         .then(res => {
-          console.log(res)
           if (res.data.error_code == "0") {
             this.$store.dispatch("my_token", res.data.data.token);
             MessageBox.alert("登陆成功")
@@ -158,7 +154,7 @@ export default {
     //获取我的个人信息
     _my_querys() {
       this.$http.get(this.$url.URL.my_message).then(res => {
-        this.$store.dispatch("my_message", res.data.data);
+        this.$store.dispatch("my_data", res.data.data);
       });
     }
   }

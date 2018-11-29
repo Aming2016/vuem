@@ -1,8 +1,8 @@
 import ZHerder from './captions.vue'
-const zHerder = {
+const zHeader = {
     install:function(Vue){
-        Vue.component("zHerder",ZHerder)
+        Vue.component("zHeader",ZHerder)
     }
 }
 
-export default zHerder
+export default zHeader

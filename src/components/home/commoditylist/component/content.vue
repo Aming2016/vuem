@@ -72,7 +72,7 @@ export default {
             "&page=" +
             this.page +
             "&user_id=" +
-            this.$store.state.my_message.user_id +
+            this.$store.state.my_data.user_id +
             "&sort=1"
         )
         .then(res => {

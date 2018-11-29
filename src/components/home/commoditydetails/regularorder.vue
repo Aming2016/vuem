@@ -31,14 +31,18 @@
       <!-- <z-radio style="margin-top:0.1rem;"></z-radio> -->
       <z-textinput style="margin-top:0.1rem;"></z-textinput>
     </div>
-    <z-execute style="margin-top:0.1rem;" @executevalue="executevaluebtn" v-if="details.show_exe_type=='1'"></z-execute>
+    <z-execute
+      style="margin-top:0.1rem;"
+      @executevalue="executevaluebtn"
+      v-if="details.show_exe_type=='1'"
+    ></z-execute>
     <z-commessage :messagecontent="details.goods_context" style="margin-top:0.1rem;"></z-commessage>
     <z-goodsaction :allmoney="allmoney" @buybtn="buybtn"></z-goodsaction>
   </div>
 </template>
 
 <script>
-import { Toast ,MessageBox} from "mint-ui";
+import { Toast, MessageBox } from "mint-ui";
 export default {
   //  普通下单
   name: "regularorder",
@@ -55,12 +59,12 @@ export default {
       parameter: "", //新模板参数；
       allmoney: "", //总价钱allmoney//总价
       user_id: "", //用户userid
-      qty_parameters:"",//组合数量
-      executevalue:"",//执行条件参数
+      qty_parameters: "", //组合数量
+      executevalue: "" //执行条件参数
     };
   },
   created() {
-    this.user_id = this.$store.state.my_message.user_id;
+    this.user_id = this.$store.state.my_data.user_id;
     this.details = this.$store.state.details;
     this.inputobject.default = this.details.minimum;
     this.disposenumber(this.details.price);
@@ -84,16 +88,16 @@ export default {
       }
     },
     //组合数量
-    qty_parametersbtn(val){
-      this.qty_parameters=val;
+    qty_parametersbtn(val) {
+      this.qty_parameters = val;
     },
     //总数量
     num(val) {
       this.nums = val;
     },
     //执行条件
-    executevaluebtn(val){
-      this.executevalue=val
+    executevaluebtn(val) {
+      this.executevalue = val;
     },
     //金额处理函数保留小数点后面两位小数
     disposenumber(val) {
@@ -121,6 +125,21 @@ export default {
       }
     },
     buybtn() {
+      if (this.$store.state.my_data) {
+        if (parseInt(this.allmoney) >= parseInt(this.details.minimum_money)) {
+          this.refer(); //参值
+        } else {
+          Toast({
+            message: "购买数量最低为" + this.details.minimum,
+            position: "bottom",
+            duration: 1000
+          });
+        }
+      } else {
+        MessageBox.confirm('还未登陆，是否前往登陆页面？').then(action => {
+          this.$router.push("/login")
+        });
+      }
       if (parseInt(this.allmoney) >= parseInt(this.details.minimum_money)) {
         this.refer(); //参值
       } else {
@@ -131,29 +150,31 @@ export default {
         });
       }
     },
-    refer(){
+    refer() {
       let proms = {
-        number:this.nums,
-        goods_id:this.details.goods_id,
-        user_id:this.user_id,
-        parameters:this.parameter,
-        qty_parameters:this.qty_parameters
-      }
-      let newproms = JSON.parse(JSON.stringify(proms)); 
-      let executevalued = JSON.parse(JSON.stringify(this.executevalue)); 
-      let newpromswarp = Object.assign(
-        newproms,
-        executevalued
-      );
-      this._querys(newpromswarp)
+        number: this.nums,
+        goods_id: this.details.goods_id,
+        user_id: this.user_id,
+        parameters: this.parameter,
+        qty_parameters: this.qty_parameters
+      };
+      let newproms = JSON.parse(JSON.stringify(proms));
+      let executevalued = JSON.parse(JSON.stringify(this.executevalue));
+      let newpromswarp = Object.assign(newproms, executevalued);
+      this._querys(newpromswarp);
     },
     //克隆生产对象产值对象
     _querys(prms) {
-      this.$http.post(this.$url.URL.waitinfi,prms).then(res => {
-        if(res.data.error_code==0){
-          MessageBox.alert(res.data.error_msg+" 下单金额为:"+res.data.data.total_order_amount+"元")
-        }else{
-          MessageBox.alert(res.data.error_msg)
+      this.$http.post(this.$url.URL.waitinfi, prms).then(res => {
+        if (res.data.error_code == 0) {
+          MessageBox.alert(
+            res.data.error_msg +
+              " 下单金额为:" +
+              res.data.data.total_order_amount +
+              "元"
+          );
+        } else {
+          MessageBox.alert(res.data.error_msg);
         }
       });
     }
