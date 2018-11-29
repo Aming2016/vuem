@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <router-view/>
+    <keep-alive>
+    <router-view v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
+    <z-navbtn></z-navbtn>
   </div>
 </template>
 
@@ -11,8 +15,7 @@ export default {
     return {
     };
   },
-  created(){
-  }
+
 }
 </script>
 

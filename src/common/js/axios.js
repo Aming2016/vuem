@@ -1,21 +1,25 @@
 //引入axios
 import Vue from 'vue'
 import axios from 'axios'
-import { Toast ,Header,Button } from 'mint-ui'
+import stroe from "../../store"
+import { Toast ,Header,Button ,InfiniteScroll ,Checklist ,DatetimePicker ,MessageBox } from 'mint-ui'
 import 'mint-ui/lib/style.css'
 Vue.component(Toast.name, Toast)
 Vue.component(Header.name, Header)
 Vue.component(Button.name, Button)
+Vue.component(Checklist.name, Checklist),//复选框
+Vue.use(InfiniteScroll);
+Vue.component(DatetimePicker.name, DatetimePicker);//时间组件
+// Vue.use(PickerValue);//时间组件
 
 axios.interceptors.request.use(//header拦截器
     // 在发送请求之前做些什么
+    
     config => {
         // 判断是否存在token，如果存在的话，则每个http header都加上token
-        if (window.localStorage.token) {
+        if (stroe.state.my_token) {
             config.headers = {
-                'unique-code': window.localStorage.token,
-                'accessKey': '22768533-b742-4a76-bb04-a138020e3905',
-                'terminal-source': "WEB"
+                'token':stroe.state.my_token
             }
         }
         return config;

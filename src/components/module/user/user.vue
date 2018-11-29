@@ -14,11 +14,6 @@ export default {
   props:{
       usertext:String
   },
-  methods: {
-    gobtn() {
-      this.$router.go(-1);
-    }
-  },
   watch: {
       user(val){
           this.$emit("userbtn",val)
